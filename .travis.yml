@@ -5,10 +5,10 @@ services:
 
 before_install:
   - docker build -t hello-docker .
-  - docker run -d -p 80:80 hello-docker
+  - docker run -d -P hello-docker
 
 script:
-  - curl --retry 2 --retry-delay 5 -v http://localhost/hello/docker
+  - curl --retry 2 --retry-delay 5 -v http://localhost:5000/hello/docker
 
 after_script:
   - docker rm -f hello-docker
