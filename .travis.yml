@@ -8,8 +8,9 @@ before_install:
   - docker run -d -P hello-docker
 
 script:
+  # - curl --retry 2 --retry-delay 5 -v http://localhost:5000/hello/docker
   - sleep 5
-  - curl --retry 2 --retry-delay 5 -v http://localhost:5000/hello/docker
+  - curl -v http://localhost:5000/hello/docker
 
 after_script:
   - docker rm -f hello-docker
