@@ -19,5 +19,5 @@ after_script:
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
     docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-    docker push ptdorf/ping;
+    docker push ptdorf/flask;
     fi
