@@ -4,10 +4,15 @@ sudo: required
 services:
   - docker
 
+env:
+  global:
+    - secure: "T4VR9+MqMp77LEc+I0lxb457R4JGYYl0T0fyeeXNvOnEwd9fFmLUajrHzWWqWIvNdJ4g5fQW6Tm7xVzoyYFmVIH3BH1VTk2j/tHMJ2UYmbjn6Aetuc00DNQ8eTMumF+i4iKJDV+nXN/1SXufOjMVNWAPGMONFvdVANj1/iYrSEoC+gxvi/CcOc3Yl2XctY1q92NWZrfUZ6Hi/F0OLQYG5GzNf6SuqKHC5ADFYPCYdQThZKswK+Pz5NgmcoaSpI93fH58vRSwfixl2zP8SMf1jE9S/LTc2qA8J14o3kpWwUpbUadgTyyfTcN1eQC7j8LeWLrzISYk3LtGrl6Gm/C0NCqCUWBzxrM6dOLUR2mdO28z/lonUJkhvBJYuFtyOlw2BtRYaRpQnhtGu0nZgAP6rlHjD5as5dZn4aExpiUlV4wb9oAUKXHuTFzzn6MBnK5PJo7FwLn0gb1W0W5BUGM/pGe1K297LeW9DphlppdJjbG5PWUaAtGp5/slLMoWeMOJDvIVU3NqkwqI2VCd+tAVfXwccV85mADRroUPNZzDONxcA28k0sw3sSqleFv3fBDSUrANOA433LCJGz0bTQv92OeVGo45IwHL8Xc3WQ7fsYMyl2HVebtAuGqbewa+Ctsp9ot9ikMUVIKhsFWgB+K7Ri3FY7IK0cHiH9EJDTCUAVw="
+    - secure: "PI2Pae5AtUHKDLsm/L5RV82lITWktRYWyT1JhXnDFZGMH/SGSVVmvU+OLfrLIn6/zsv4ltHqmZtxAkUgvvnn2yTQAjjM6li+ZZZ0yN3Uq7MW7c6s6cTDlfgosBFUNNthHi40mk200Zkr7/LKKPU0gF4MsvwF24jgHj5Q7qSq4hsIL7ALvzwYEGFhijpMQmXs1L2rITYxc3hNPPPXtJv4JCZleo6DJKaeA3w1K4zAFT/zbMKukIbk60yokMtBUmcA7xo8swVjiMTvb2whjnvhehL/zW+KHAxg7Qfs0RiklWm4Y/i24oyYHeeSIpGuNyoIsnG+B0W3RQVPIR0iWOinU6jY6Ta8vOAxEj6Qf3whPuqr2jFtx6vrPDGJozSqLA8o5MJtKlV9K/ij8z85wRIemZmiI+yQ9Q3RugCUcJnagez6WZusxFcy1iyE5HTm3ETbYmnNeCvp1xuKZzg7yniP4oXzSw3RyMxBZNJusbDdNVA4/L4W7YK+qcnzbIlW7nTL1Rh93+IiXzM/tEvK2a/gJ75GWPpQdaakud7FRdZR+bTwCK8j0nbOdqSlU7addFmIqdhPs8Gbpa1zs7xA8L39YM3zxtRv521uVdpsdKBym/XmmgLJQjWP8OecALiTca/7eTR02qBoWh4Uz3xq2yDKdPRUciG8JcIP/UbIatCc9cY="
+
 before_install:
   - docker version
-  - docker build -t ptdorf/flask .
-  - docker run -d -p 5000:5000 --name flask ptdorf/flask
+  - docker build -t flask .
+  - docker run -d -p 5000:5000 --name flask flask
 
 script:
   - sleep 0.2
@@ -17,7 +22,4 @@ after_script:
   - docker rm -f flask
 
 after_success:
-  - if [ "$TRAVIS_BRANCH" == "master" ]; then
-    docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-    docker push ptdorf/flask;
-    fi
+  - ./script/deploy
