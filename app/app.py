@@ -6,7 +6,7 @@ app = flask.Flask(__name__)
 
 @app.route("/")
 @app.route("/<path:name>")
-def home(name="World"):
+def hello(name="World"):
     return flask.render_template("hello.html", name=name)
 
 @app.route("/health")

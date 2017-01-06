@@ -5,7 +5,6 @@ services:
   - docker
 
 before_install:
-  - sudo apt-get install docker
   - docker version
   - docker build -t hello .
   - docker run -d -p 5000:5000 --name hello hello
