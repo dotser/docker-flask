@@ -6,12 +6,12 @@ services:
 
 before_install:
   - docker version
-  - docker build -t hello-docker .
-  - docker run -d -p 5000:5000 hello-docker
+  - docker build -t hello .
+  - docker run -d -p 5000:5000 --name hello hello
 
 script:
   - sleep 0.5
-  - curl http://localhost:5000/hello/docker
+  - curl http://localhost:5000/docker
 
 after_script:
-  - docker rm -f hello-docker
+  - docker rm -f hello
