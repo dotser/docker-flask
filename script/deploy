@@ -7,7 +7,7 @@ echo "==> Travis environment"
 env | grep TRAVIS
 
 echo "==> Docker environment"
-env | grep DOCKER | grep -v DOCKER_PASSWORD
+env | grep DOCKER | grep -v DOCKER_PASSWORD
 
 if [ "$TRAVIS_BRANCH" == "master" ]
 then
