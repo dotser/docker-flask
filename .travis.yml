@@ -9,7 +9,6 @@ before_install:
   - docker version
   - docker run -it --rm ubuntu bash -c 'env'
   - docker ps -a
-  
 
 script:
   # - curl --retry 2 --retry-delay 5 -v http://localhost:5000/hello/docker
