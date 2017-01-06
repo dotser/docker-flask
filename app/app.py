@@ -2,8 +2,7 @@
 """Hello docker.
 
 Usage:
-  app.py run  [--port <port>] [--host <host>] [--debug]
-  app.py info [--port <port>] [--host <host>] [--debug]
+  app.py [--port <port>] [--host <host>] [--debug]
   app.py --version
 
 Options:
@@ -12,12 +11,10 @@ Options:
   --debug        Turns debugging on
   --version      Show version
 """
-
 import flask
 import docopt
 
 app = flask.Flask(__name__)
-
 
 @app.route("/")
 @app.route("/<path:name>")
@@ -28,19 +25,11 @@ def hello(name='World'):
 def health():
     return 'OK'
 
-def main(args):
-    if args['info']:
-        print(args)
-        exit()
-
-    if args['run']:
-        app.run(
-            host=args['--host'],
-            port=int(args['--port']),
-            debug=args['--debug']
-        )
-
-
 if __name__ == "__main__":
-    args = docopt.docopt(__doc__, version="hello-docker 1.0")
-    main(args)
+    args = docopt.docopt(__doc__, version="hello-docker v1.0")
+    print(args)
+    app.run(
+        host=args['--host'],
+        port=int(args['--port']),
+        debug=args['--debug']
+    )
