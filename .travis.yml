@@ -5,7 +5,7 @@ services:
   - docker
 
 before_install:
-  - service docker start
+  - service --status-all
   - docker version
   - docker build -t hello .
   - docker run -d -p 5000:5000 --name hello hello

@@ -8,3 +8,8 @@ RUN pip install -r requirements.txt
 
 ENTRYPOINT ["python", "app.py"]
 CMD ["--port", "5000"]
+
+# ENTRYPOINT ["/bin/echo"]
+# CMD ["uptime"]
+# # CMD ["WORLD"]
+# # CMD ["ping localhost"]
