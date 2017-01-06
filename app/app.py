@@ -1,5 +1,20 @@
 #!/usr/bin/env python
+"""Hello docker.
+
+Usage:
+  app.py run  [--port <port>] [--host <host>] [--debug]
+  app.py info [--port <port>] [--host <host>] [--debug]
+  app.py --version
+
+Options:
+  --port <port>  Sets the listen port [default: 5000]
+  --host <host>  Sets the listen interface [default: 0.0.0.0]
+  --debug        Turns debugging on
+  --version      Show version
+"""
+
 import flask
+import docopt
 
 app = flask.Flask(__name__)
 
@@ -13,4 +28,19 @@ def hello(name='World'):
 def health():
     return 'OK'
 
-app.run(host='0.0.0.0', debug=True)
+def main(args):
+    if args['info']:
+        print(args)
+        exit()
+
+    if args['run']:
+        app.run(
+            host=args['--host'],
+            port=int(args['--port']),
+            debug=args['--debug']
+        )
+
+
+if __name__ == "__main__":
+    args = docopt.docopt(__doc__, version="hello-docker 1.0")
+    main(args)
